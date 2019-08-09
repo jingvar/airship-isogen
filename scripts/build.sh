@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -xe
 
 debootstrap \
     --arch=amd64 \
@@ -11,7 +11,7 @@ debootstrap \
 
 cat  << EOF | chroot $HOME/LIVE_BOOT/chroot
 
-set -x 
+set -xe
 
 echo "debian-live" > /etc/hostname
 apt-get update && apt-get install  -y --no-install-recommends \
