@@ -14,6 +14,8 @@ cat  << EOF | chroot $HOME/LIVE_BOOT/chroot
 set -xe
 
 echo "debian-live" > /etc/hostname
+echo "127.0.0.1 localhost" > /etc/hosts
+
 apt-get update && apt-get install  -y --no-install-recommends \
     linux-image-amd64 \
     live-boot \
@@ -21,11 +23,23 @@ apt-get update && apt-get install  -y --no-install-recommends \
 
 apt-get install -y --no-install-recommends \
     cloud-init \
+    apt-transport-https \
     curl 
+
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+echo "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" > /etc/apt/sources.list.d/docker.list
+
+apt-get update && apt-get install  -y --no-install-recommends --allow-unauthenticated \
+    docker-ce \
+    kubelet \
+    kubeadm \
+    kubectl
 
 echo 'root:r00tme' | chpasswd
 
 echo 'datasource_list: [ None ]' > /etc/cloud/cloud.cfg.d/95_no_datasorce.cfg
+
+rm -rf /var/lib/apt/lists/*
 
 EOF
 
