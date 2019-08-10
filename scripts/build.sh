@@ -84,7 +84,7 @@ set default="0"
 set timeout=30
 
 menuentry "Debian Live" {
-    linux /vmlinuz boot=live quiet nomodeset
+    linux /vmlinuz boot=live quiet nomodeset ip=frommedia
     initrd /initrd
 }
 EOF
