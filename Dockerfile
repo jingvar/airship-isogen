@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y \
     mtools \
  && rm -rf /var/lib/apt/lists/*
 
-COPY scripts /scripts
+COPY . /builder
