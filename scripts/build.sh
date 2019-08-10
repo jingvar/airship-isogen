@@ -41,6 +41,7 @@ apt-get update && apt-get install  -y --no-install-recommends \
 apt-get install -y --no-install-recommends \
     cloud-init \
     apt-transport-https \
+    openssh-server \
     curl 
 
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
