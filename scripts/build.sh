@@ -55,11 +55,13 @@ apt-get update --allow-insecure-repositories && apt-get install  -y --no-install
 
 echo 'root:r00tme' | chpasswd
 
-echo 'datasource_list: [ None ]' > /etc/cloud/cloud.cfg.d/95_no_datasorce.cfg
-
 rm -rf /var/lib/apt/lists/*
 
 EOF
+
+cp /builder/files/interfaces.config $HOME/LIVE_BOOT/chroot/etc/network/interfaces
+render_template /builder/templates/70-persistent-net.rules > $HOME/LIVE_BOOT/chroot/etc/udev/rules.d/70-persistent-net.rules
+render_template /builder/templates/cloud-config.yml > $HOME/LIVE_BOOT/chroot/etc/cloud/cloud.cfg.d/95_no_cloud_ds.cfg
 
 mkdir -p $HOME/LIVE_BOOT/{scratch,image/live}
 mksquashfs \

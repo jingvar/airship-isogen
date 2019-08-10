@@ -1,0 +1,30 @@
+datasource_list: [ NoCloud, None ]
+network:
+  version: 1
+  config:
+    - type: physical
+      name: id0
+      mac_address: ${ACCESS_MAC_ADDRESS}
+      subnets:
+         - type: static
+           address: ${ACCESS_IP_CIDR}
+           gateway: ${ACCESS_GW}
+#  version: 2
+#  ethernets:
+#    id0:
+#      match:
+#        macaddress: ${ACCESS_MAC_ADDRESS}
+#      dhcp4: false
+#      addresses:
+#        - ${ACCESS_IP_CIDR}
+#      gateway4: ${ACCESS_GW}
+#      nameservers:
+#        addresses: [$DNS_SERVER]
+ssh_authorized_keys:
+  - ${ACCESS_SSH_PUB_KEY}
+runcmd:
+  - [ kubeadm, config, images, pull ]
+  - [ kubeadm, init, --pod-network-cidr=192.168.0.0/16, --ignore-preflight-errors, 'SystemVerification' ]
+  - [ kubectl, --kubeconfig, /etc/kubernetes/admin.conf, apply, -f, 'https://docs.projectcalico.org/v3.8/manifests/calico.yaml' ]
+  - [ chmod, +r, /etc/kubernetes/admin.conf ]
+  - [ touch, /deployed ]
