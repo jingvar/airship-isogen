@@ -2,6 +2,23 @@
 
 set -xe
 
+if [ "$1" == "" ]
+then
+    echo "ERROR: Pass SSH public key"
+    exit 1
+fi
+ACCESS_SSH_PUB_KEY=$1
+ACCESS_MAC_ADDRESS=${2:-52:54:00:18:6e:50}
+ACCESS_IP_CIDR=${3:-172.18.164.37/27}
+ACCESS_GW=${4:-172.18.164.33}
+DNS_SERVER=${5:-8.8.8.8}
+
+function render_template() {
+    file_path=$1
+    tmpl=$(cat ${file_path})
+    eval "echo \"${tmpl}\""
+}
+
 debootstrap \
     --arch=amd64 \
     --variant=minbase \
