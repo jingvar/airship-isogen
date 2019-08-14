@@ -26,5 +26,6 @@ runcmd:
   - [ kubeadm, config, images, pull ]
   - [ kubeadm, init, --pod-network-cidr=192.168.0.0/16, --ignore-preflight-errors, 'SystemVerification' ]
   - [ kubectl, --kubeconfig, /etc/kubernetes/admin.conf, apply, -f, 'https://docs.projectcalico.org/v3.8/manifests/calico.yaml' ]
+  - [ kubectl, taint, nodes, --all, node-role.kubernetes.io/master- ]
   - [ chmod, +r, /etc/kubernetes/admin.conf ]
   - [ touch, /deployed ]
