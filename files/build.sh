@@ -9,7 +9,9 @@ if [ ! -f $CONFIG ] ;then
     exit 1
 fi
 
-source functions.sh
+source `dirname $0`/functions.sh
+
+_get_mac_from_config
 
 _debootstrap
 
