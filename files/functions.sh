@@ -1,7 +1,7 @@
 #functions
 
-function get_mac_from_config () {
-  ACCESS_MAC_ADDRESS=$(grep -m 1 mac ${CONFIG} | awk '{print $2}')
+function _get_mac_from_config () {
+  ACCESS_MAC_ADDRESS=`yq r ${CONFIG} "network.config[0].mac_address"`
 }
 
 function _render_template() {
