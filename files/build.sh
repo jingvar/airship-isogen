@@ -2,7 +2,7 @@
 
 set -xe
 
-CONFIG=/config/cloud-config.yml
+CONFIG=/config/cloud-config.yaml
 
 if [ ! -f $CONFIG ] ;then
     echo "$CONFIG not found"
@@ -19,7 +19,9 @@ cat $(dirname $0)/packages_install.sh | chroot $HOME/LIVE_BOOT/chroot
 
 cp /builder/interfaces.config $HOME/LIVE_BOOT/chroot/etc/network/interfaces
 
-_render_template /builder/70-persistent-net.rules > $HOME/LIVE_BOOT/chroot/etc/udev/rules.d/70-persistent-net.rules
+
+# NOTE Not used so far
+# _render_template /builder/70-persistent-net.rules > $HOME/LIVE_BOOT/chroot/etc/udev/rules.d/70-persistent-net.rules
 
 cp $CONFIG $HOME/LIVE_BOOT/chroot/etc/cloud/cloud.cfg.d/95_no_cloud_ds.cfg
 
