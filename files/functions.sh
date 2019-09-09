@@ -73,7 +73,6 @@ function _make_iso(){
         /boot/grub/bios.img=$HOME/LIVE_BOOT/scratch/bios.img
 }
 function _make_metadata(){
-  echo "boot_image_path: /config/debian-custom.iso" > $1
-  echo "k8s_client_config: /config/k8s_client.cfg" >> $1
+  echo "boot_image_path: $2/debian-custom.iso" > $1
 }
 
