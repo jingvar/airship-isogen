@@ -1,1 +1,0 @@
-SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="${ACCESS_MAC_ADDRESS}", NAME="id0"

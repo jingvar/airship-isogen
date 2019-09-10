@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
  
 COPY ./files/build.sh /builder/
-COPY ./files/70-persistent-net.rules /builder/
 COPY ./files/interfaces.config /builder/
 COPY ./files/functions.sh /builder/
 COPY ./files/grub.conf /builder/
